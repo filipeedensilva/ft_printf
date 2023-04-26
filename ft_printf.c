@@ -53,7 +53,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%' && ft_placeholder(*(char *)(format + 1)))
 		{
-			ft_checker(&args, *(char *)(format + 1), &lst); 
+			ft_checker(&args, *(char *)(format + 1), &lst);
 			format++;
 		}
 		else

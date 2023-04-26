@@ -56,6 +56,7 @@ void	ft_putlhex(unsigned int x, char c, t_ind *lst)
 	char	*str;
 	char	*base;
 
+	str = NULL;
 	if (c == 'X')
 		base = "0123456789ABCDEF";
 	else
