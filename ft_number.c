@@ -6,7 +6,7 @@
 /*   By: feden-pe <feden-pe@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 21:40:23 by feden-pe          #+#    #+#             */
-/*   Updated: 2023/04/26 18:49:57 by feden-pe         ###   ########.fr       */
+/*   Updated: 2023/04/26 19:13:30 by feden-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ void	ft_putlnbr(long num, t_ind *lst)
 
 void	ft_putlptr(size_t ptr, t_ind *lst)
 {
-	char	*base;
-
-	base = "0123456789abcdef";
 	if (!ptr)
 		ft_putlstr("(nil)", lst);
 	else
@@ -43,35 +40,32 @@ void	ft_putlptr(size_t ptr, t_ind *lst)
 		if (ptr < 16)
 		{
 			ft_putlstr("0x", lst);
-			ft_putlchar(base[ptr % 16], lst);
+			ft_putlchar(HEX_LOWER[ptr % 16], lst);
 			return ;
 		}
 		ft_putlptr(ptr / 16, lst);
-		ft_putlchar(base[ptr % 16], lst);
+		ft_putlchar(HEX_LOWER[ptr % 16], lst);
+	}
+}
+
+void	ft_converter(unsigned int x, char *base, t_ind *lst)
+{
+	if (x / 16 == 0)
+	{
+		ft_putlchar(base[x % 16], lst);
+		return ;
+	}
+	else
+	{
+		ft_converter(x / 16, base, lst);
+		ft_putlchar(base[x % 16], lst);
 	}
 }
 
 void	ft_putlhex(unsigned int x, char c, t_ind *lst)
 {
-	char	*str;
-	char	*base;
-
-	str = NULL;
-	if (c == 'X')
-		base = "0123456789ABCDEF";
-	else
-		base = "0123456789abcdef";
-	if (!x)
-	{
-		ft_putlchar('0', lst);
-		return ;
-	}
-	while (x)
-	{
-		*str = base[x % 16];
-		x /= 16;
-		str++;
-	}
-	while (*str)
-		ft_putlchar(*(str)--, lst);
+	if (c == 'x')
+		ft_converter(x, HEX_LOWER, lst);
+	else if (c == 'X')
+		ft_converter(x, HEX_UPPER, lst);
 }
