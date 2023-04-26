@@ -6,20 +6,15 @@
 /*   By: feden-pe <feden-pe@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 21:40:23 by feden-pe          #+#    #+#             */
-/*   Updated: 2023/04/25 20:27:00 by feden-pe         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:49:57 by feden-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putlnbr(int num, t_ind *lst)
+void	ft_putlnbr(long num, t_ind *lst)
 {
-	if (num == -2147483648)
-	{
-		ft_putlstr("-2147483648", lst);
-		return ;
-	}
-	else if (num < 0)
+	if (num < 0)
 	{
 		ft_putlchar('-', lst);
 		ft_putlnbr(-num, lst);
@@ -78,16 +73,4 @@ void	ft_putlhex(unsigned int x, char c, t_ind *lst)
 	}
 	while (*str)
 		ft_putlchar(*(str)--, lst);
-}
-
-void	ft_putluint(unsigned int u, t_ind *lst)
-{
-	if (u > 9)
-		ft_putluint(u / 10, lst);
-	else
-	{
-		u %= 10;
-		u += '0';
-		ft_putlchar(u, lst);
-	}
 }

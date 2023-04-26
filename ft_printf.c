@@ -6,7 +6,7 @@
 /*   By: feden-pe <feden-pe@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:19:17 by feden-pe          #+#    #+#             */
-/*   Updated: 2023/04/25 20:28:39 by feden-pe         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:51:13 by feden-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_checker(va_list *args, char format, t_ind *lst)
 	else if (format == 'p')
 		ft_putlptr(va_arg(*args, size_t), lst);
 	else if (format == 'u')
-		ft_putluint(va_arg(*args, unsigned int), lst);
+		ft_putlnbr(va_arg(*args, unsigned int), lst);
 	else if (format == 'x')
 		ft_putlhex(va_arg(*args, unsigned int), 'x', lst);
 	else if (format == 'X')
@@ -52,7 +52,10 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%' && ft_placeholder(*(char *)(format + 1)))
-			ft_checker(&args, *(char *)(format + 1), &lst);
+		{
+			ft_checker(&args, *(char *)(format + 1), &lst); 
+			format++;
+		}
 		else
 			ft_putlchar(*format, &lst);
 		format++;
